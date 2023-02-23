@@ -25,6 +25,28 @@ describe('The User Profile Component', () => {
     //TODO: create test to check for password blank
 
     //TODO: create test to check for password confirm blank
+    test('displays an error message if password confirm blank', () => {
+        render(<UserProfileComponent />);
+
+        const firstNameInput = screen.getByLabelText('First Name*');
+        fireEvent.change(firstNameInput, { target: { value: 'Bob' } });
+
+        const lastNameInput = screen.getByLabelText('Last Name*');
+        fireEvent.change(lastNameInput, { target: { value: 'Smith' } });
+
+        const emailInput = screen.getByLabelText('Email*');
+        fireEvent.change(emailInput, { target: { value: 'abc@def.com' } });
+
+        const passwordInput = screen.getByLabelText('Password*');
+        fireEvent.change(passwordInput, { target: { value: 'asdf' } });
+
+        const submitButton = screen.getByText('Update');
+        fireEvent.click(submitButton);
+
+        const errorMessage = screen.getByText(/Password Confirm cannot be blank/i);
+        expect(errorMessage).toBeInTheDocument();
+    });
+
 
     //TODO: create test to check for password and password confirm not matching
 

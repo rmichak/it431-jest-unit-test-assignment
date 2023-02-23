@@ -12,11 +12,6 @@ const UserProfileComponent = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        if (password !== passwordConfirm) {
-            setErrorMessage("Passwords do not match");
-            setIsSubmitted(false);
-            return;
-        }
         if (firstName.trim() === '') {
             setErrorMessage('First Name cannot be blank');
             setIsSubmitted(false);
@@ -39,6 +34,11 @@ const UserProfileComponent = () => {
         }
         if (passwordConfirm.trim() === '') {
             setErrorMessage('Password Confirm cannot be blank');
+            setIsSubmitted(false);
+            return;
+        }
+        if (password !== passwordConfirm) {
+            setErrorMessage("Passwords do not match");
             setIsSubmitted(false);
             return;
         }
